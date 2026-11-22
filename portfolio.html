@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ishika Mehrotra · Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: bold, modern, premium — a young ML engineer who ships
+   IDEA: a bento board of results — every tile is a proof point, numbers first
+   PICTURE: the hero bento grid itself (big name + tiles of metrics, status, skills marquee)
+   COLOUR and TYPE: beige ground, light-blue + orange + deep-brown tiles; Unbounded + Manrope
+   LAYOUT: floating pill nav, hero bento, experience cards, project showcases, skills, footer CTA */
+:root{color-scheme:light dark;
+--bg:light-dark(#f4ece0,#17140f);--ink:light-dark(#241b13,#f4ece0);--mute:light-dark(#6c5f50,#b6a893);
+--tile:light-dark(#fffaf3,#211d17);--line:light-dark(#e4d7c4,#352e25);
+--blue:light-dark(#d6e8f7,#1b2733);--blueink:light-dark(#21557d,#9ccbf0);
+--acc:#f26a1b;--deep:light-dark(#241b13,#f4ece0);--deepink:light-dark(#f4ece0,#241b13)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Manrope,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:Unbounded,Manrope,sans-serif;font-weight:700;line-height:1.05;text-wrap:balance;margin:0;letter-spacing:-.02em}
+h2{font-size:clamp(30px,4.4vw,48px)}
+h3{font-size:20px;letter-spacing:-.01em}
+a{color:inherit}
+html{scroll-padding-top:96px;scroll-behavior:smooth}
+.wrap{max-width:1240px;margin:0 auto;padding:0 max(4vw,16px)}
+section{padding:clamp(56px,8vw,112px) 0}
+.head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:36px}
+.head p{margin:0;color:var(--mute);max-width:44ch}
+/* nav */
+nav{position:sticky;top:14px;z-index:9;display:flex;justify-content:center;padding:0 12px}
+.pill{display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:color-mix(in srgb,var(--tile) 80%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:0 10px 30px -12px rgba(60,40,20,.25);max-width:100%;overflow-x:auto}
+.pill a{flex:none;text-decoration:none;padding:10px 16px;border-radius:999px;font-weight:600;font-size:15px}
+.pill a:hover,.pill a:focus-visible{background:var(--blue);outline:none}
+.pill .hire{background:var(--acc);color:#fff}
+.pill .hire:hover,.pill .hire:focus-visible{background:#d9560c}
+/* hero */
+.hero{padding-top:clamp(40px,6vw,72px)}
+.hero h1{font-size:clamp(46px,9vw,124px);line-height:.95}
+.hero h1 span{color:var(--acc)}
+.tag{margin:22px 0 34px;font-size:clamp(18px,2vw,22px);color:var(--mute);max-width:46ch}
+.tag b{color:var(--ink)}
+.bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:auto;gap:14px}
+.t{border-radius:24px;padding:24px;background:var(--tile);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between;gap:14px;min-height:170px;position:relative;overflow:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.t:hover{transform:translateY(-4px)}
+.t small{font-size:14px;font-weight:600;color:var(--mute)}
+.t .n{font-family:Unbounded;font-size:clamp(40px,5vw,64px);line-height:1;letter-spacing:-.03em}
+.w2{grid-column:span 2}.h2{grid-row:span 2}
+.about{background:var(--blue);border-color:transparent}
+.about p{margin:0;font-size:17px;color:var(--ink)}
+.about small{color:var(--blueink)}
+.orange{background:var(--acc);border-color:transparent;color:#fff}.orange small{color:#ffe1cf}
+.dark{background:var(--deep);color:var(--deepink);border-color:transparent}.dark small{color:color-mix(in srgb,var(--deepink) 65%,transparent)}
+.dark .n{color:var(--acc)}
+.status{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px}
+.dot{width:12px;height:12px;border-radius:50%;background:#26b562;box-shadow:0 0 0 0 rgba(38,181,98,.6);animation:pulse 2s infinite;flex:none}
+@keyframes pulse{70%{box-shadow:0 0 0 12px rgba(38,181,98,0)}100%{box-shadow:0 0 0 0 rgba(38,181,98,0)}}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 20px;border-radius:999px;font-weight:700;text-decoration:none;background:var(--deep);color:var(--deepink);border:0;font-size:15px;cursor:pointer;font-family:inherit}
+.btn.o{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.btn:focus-visible,.pill a:focus-visible,.contact a:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.marq{grid-column:1/-1;padding:16px 0;min-height:0;display:block;background:var(--tile)}
+.track{display:flex;gap:10px;width:max-content;animation:slide 38s linear infinite}
+.marq:hover .track{animation-play-state:paused}
+.track span{white-space:nowrap;padding:8px 16px;border-radius:999px;background:var(--bg);border:1px solid var(--line);font-weight:600;font-size:15px}
+.track span:nth-child(5n+1){background:var(--blue);border-color:transparent}
+@keyframes slide{to{transform:translateX(-50%)}}
+/* experience */
+.jobs{display:grid;gap:14px}
+.job{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:28px;padding:30px;border-radius:24px;background:var(--tile);border:1px solid var(--line)}
+.job .org{font-family:Unbounded;font-size:clamp(22px,2.6vw,30px);line-height:1.1;letter-spacing:-.02em}
+.job .role{margin-top:10px;font-weight:700;color:var(--blueink)}
+.chip{display:inline-block;margin-top:14px;padding:6px 12px;border-radius:999px;background:var(--blue);font-size:14px;font-weight:600;white-space:nowrap}
+.job ul{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.job li{padding-left:28px;position:relative}
+.job li::before{content:"";position:absolute;left:0;top:.55em;width:14px;height:2px;background:var(--acc)}
+/* projects */
+#projects{background:var(--blue)}
+.projs{display:grid;gap:18px}
+.proj{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);border-radius:28px;overflow:hidden;background:var(--tile)}
+.proj .side{background:var(--deep);color:var(--deepink);padding:32px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.proj:nth-child(2) .side{background:var(--acc);color:#fff}
+.proj .kind{font-weight:700;font-size:14px;opacity:.75}
+.proj .big{font-family:Unbounded;font-size:clamp(48px,6vw,76px);line-height:.95;letter-spacing:-.03em}
+.proj:nth-child(odd) .big{color:var(--acc)}
+.proj .kl{font-weight:600;opacity:.85;max-width:26ch}
+.proj .body{padding:32px;display:flex;flex-direction:column;gap:16px}
+.proj .body p{margin:0;color:var(--mute)}
+.proj ul{margin:0;padding-left:20px}.proj li{margin:6px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+.chips span{font-size:13px;font-weight:600;padding:5px 12px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+/* skills */
+.sk{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px}
+.sk div{padding:24px;border-radius:22px;background:var(--tile);border:1px solid var(--line)}
+.sk h3{font-size:16px;margin-bottom:14px}
+.sk p{margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.sk p span{font-size:14px;padding:4px 10px;border-radius:8px;background:var(--bg);white-space:nowrap}
+/* edu */
+.edu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.edu .t{min-height:200px}
+.edu .t h3{font-size:18px}
+.edu .t p{margin:4px 0 0;color:var(--mute);font-size:15px}
+.edu .orange p,.edu .dark p{color:inherit;opacity:.8}
+/* footer */
+footer{padding:clamp(64px,9vw,120px) 0 40px}
+.cta{border-radius:32px;background:var(--deep);color:var(--deepink);padding:clamp(32px,6vw,72px)}
+.cta h2{font-size:clamp(38px,7vw,92px);line-height:.95}
+.cta h2 span{color:var(--acc)}
+.cta p{max-width:52ch;opacity:.8;margin:22px 0 32px;font-size:17px}
+.contact{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.contact>*{display:block;padding:20px;border-radius:20px;border:1px solid color-mix(in srgb,var(--deepink) 25%,transparent);text-decoration:none}
+.contact a:hover{border-color:var(--acc)}
+.contact small{display:block;opacity:.65;font-size:13px;font-weight:600;margin-bottom:4px}
+.contact strong{overflow-wrap:anywhere;font-size:16px}
+.copy{margin-top:12px;background:var(--acc);color:#fff;border:0;border-radius:999px;padding:0 16px;min-height:40px;font:700 14px Manrope;cursor:pointer}
+.fine{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:28px;font-size:14px;color:var(--mute)}
+/* motion */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s cubic-bezier(.2,.8,.2,1)}
+.rv.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.track,.dot{animation:none}.t:hover{transform:none}html{scroll-behavior:auto}}
+@media(max-width:960px){.bento{grid-template-columns:repeat(2,minmax(0,1fr))}.edu{grid-template-columns:minmax(0,1fr)}.proj,.job{grid-template-columns:minmax(0,1fr)}.contact{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:560px){.pill a:nth-child(4){display:none}.bento{grid-template-columns:minmax(0,1fr)}.w2{grid-column:auto}.h2{grid-row:auto}.pill a{padding:10px 12px;font-size:14px}.job,.proj .side,.proj .body{padding:24px}}
+</style>
+</head>
+<body>
+<nav><div class="pill">
+<a href="#work">Experience</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#education">Education</a><a class="hire" href="#contact">Hire me</a>
+</div></nav>
+
+<header class="hero wrap">
+<h1 class="rv">Ishika<br>Mehrotra<span>.</span></h1>
+<p class="tag rv">AI/ML engineer in the making. I build models that <b>see, predict and price</b>, then ship them to production.</p>
+
+<div class="bento">
+<div class="t about w2 h2 rv">
+<small>About</small>
+<p>Computer Science student at UPES with three AI/ML and data internships. I've fine-tuned YOLOv8 for real-time detection, built pricing models on manufacturer data, and deployed ML on AWS Kubernetes with full CI/CD and monitoring. I'm most excited about AI for manufacturing: quality inspection, anomaly detection and process optimisation.</p>
+<div class="btns"><a class="btn" href="#projects">View projects →</a><a class="btn o" href="https://github.com/Ishika-commits">GitHub ↗</a></div>
+</div>
+<div class="t orange rv"><small>Internships</small><div class="n">3</div><small>IIT Kanpur · Naiyo · Lyxel &amp; Flamingo</small></div>
+<div class="t dark rv"><small>YOLOv8 detector</small><div class="n">81.3%</div><small>mAP@50 at ~2 ms per image</small></div>
+<div class="t rv"><small>B.Tech CSE · UPES</small><div class="n">8.23</div><small>CGPA · graduating 2027</small></div>
+<div class="t rv"><div class="status"><span class="dot"></span>Open to AI/ML roles</div><small>On-site in Gurugram &amp; Bhiwadi</small></div>
+<div class="t marq rv" aria-label="Tools I use"><div class="track" id="track"></div></div>
+</div>
+</header>
+
+<section id="work"><div class="wrap">
+<div class="head rv"><h2>Where I've worked</h2><p>Three internships across research, AI startups and product engineering.</p></div>
+<div class="jobs" id="jobs"></div>
+</div></section>
+
+<section id="projects"><div class="wrap">
+<div class="head rv"><h2>Selected projects</h2><p>End-to-end builds, from data and training to deployment and monitoring.</p></div>
+<div class="projs" id="proj"></div>
+</div></section>
+
+<section id="skills"><div class="wrap">
+<div class="head rv"><h2>Toolkit</h2><p>Python first, production always.</p></div>
+<div class="sk" id="skl"></div>
+</div></section>
+
+<section id="education" style="padding-top:0"><div class="wrap">
+<div class="head rv"><h2>Education &amp; wins</h2></div>
+<div class="edu">
+<div class="t dark rv"><small>Jul 2023 – Jul 2027</small><div><h3>B.Tech, Computer Science &amp; Engineering</h3><p>UPES, Dehradun · CGPA 8.23</p></div></div>
+<div class="t rv"><small>2022–2023 · 2020–2021</small><div><h3>Class XII (CBSE) 79% · Class X (ICSE) 88%</h3><p>Delhi Public School, Kalyanpur · Swaraj India Public School</p></div></div>
+<div class="t orange rv"><small>Achievements</small><div><h3>Group Lead, Smart India Hackathon 2025</h3><p>Top 10 at university level · Oracle Database SQL Certified Associate (Jun 2025)</p></div></div>
+</div>
+</div></section>
+
+<footer id="contact"><div class="wrap">
+<div class="cta rv">
+<h2>Let's build<br>something smart<span>.</span></h2>
+<p>Looking for AI/ML and data roles, especially in manufacturing, quality inspection and anomaly detection. I reply fast.</p>
+<div class="contact">
+<div><small>Email</small><strong>me.ishikamehrotra@gmail.com</strong><br><button class="copy" id="cp" type="button">Copy email</button></div>
+<a href="https://github.com/Ishika-commits"><small>GitHub</small><strong>Ishika-commits ↗</strong></a>
+<div><small>LinkedIn</small><strong>Ishika Mehrotra</strong></div>
+</div>
+</div>
+<div class="fine"><span>© 2026 Ishika Mehrotra</span><a href="#top" onclick="window.scrollTo({top:0});return false">Back to top ↑</a></div>
+</div></footer>
+
+<script>
+{
+const tools=["Python","PyTorch","YOLOv8","OpenCV","TensorFlow","scikit-learn","LangChain","RAG","FastAPI","Flask","Docker","Kubernetes","AWS","MLflow","DVC","Grafana","Power BI","Streamlit","SQL","pandas"];
+document.getElementById('track').innerHTML=[...tools,...tools].map(t=>`<span>${t}</span>`).join('');
+
+const jobs=[
+{o:"IIT Kanpur",r:"Project Intern – Resource Analytics & Workflow Automation",w:"Jun – Jul 2026 · 7 weeks",b:["Consolidated and analysed operational data from 5+ sources with Python and Excel into accurate, reliable reports.","Designed 3+ interactive Power BI dashboards tracking resource utilisation and operational KPIs for decision-makers.","Automated financial workflows with Python and Streamlit, adding validation and reconciliation checks to cut manual errors."]},
+{o:"Naiyo Pvt Ltd",r:"AI/ML Intern",w:"Apr – Jun 2026 · 9 weeks",b:["Built an ML classification model predicting market pricing from manufacturer and product attributes at ~90% accuracy.","Cleaned and transformed manufacturer and product data, and built front-end visualisations of predictions for business users."]},
+{o:"Lyxel & Flamingo",r:"Software Developer Intern",w:"Jun – Jul 2025 · 8 weeks",b:["Automated Python data pipelines to collect, clean and transform large product datasets.","Built FastAPI REST APIs on MongoDB and Elasticsearch for fast retrieval, plus pricing and trend analysis for data-driven decisions."]}];
+document.getElementById('jobs').innerHTML=jobs.map(j=>`<article class="job rv"><div><div class="org">${j.o}</div><div class="role">${j.r}</div><span class="chip">${j.w}</span></div><ul>${j.b.map(x=>`<li>${x}</li>`).join('')}</ul></article>`).join('');
+
+const proj=[
+{k:"Computer vision",t:"Smart Waste Detection & Classification",big:"81.3%",kl:"mAP@50 · 89.6% precision · ~2 ms per image",d:"A real-time detector that sorts waste into Glass, Metal, Paper, Plastic and Contamination.",b:["Fine-tuned YOLOv8n (3.0M+ parameters) with transfer learning on annotated waste images.","74.1% recall, with bounding-box localisation and confidence-based classification."],s:["Python","YOLOv8","PyTorch","OpenCV","Roboflow"]},
+{k:"MLOps",t:"Production ML Deployment & Monitoring",big:"CI/CD",kl:"Push to production on AWS EKS, monitored live",d:"An end-to-end ML app: model inference, automated delivery, Kubernetes deployment and real-time monitoring.",b:["Flask REST API serving trained models for real-time predictions.","Dockerised and auto-deployed via GitHub Actions to AWS ECR/EKS; MLflow + DVC versioning; Prometheus + Grafana dashboards."],s:["Flask","Docker","Kubernetes","AWS","MLflow","DVC","Grafana"]},
+{k:"LLM + analytics",t:"E-Commerce Price Intelligence & Pricing Advisor",big:"94%",kl:"precision spotting genuine discount drops",d:"Separates real deals from fake discounts, with an AI advisor that explains them.",b:["Price-trend and anomaly analysis on product pricing data.","LangChain-powered Streamlit advisor that cut manual deal evaluation time by 85%."],s:["LangChain","Streamlit","Plotly","FastAPI","MongoDB","Elasticsearch"]}];
+document.getElementById('proj').innerHTML=proj.map(p=>`<article class="proj rv"><div class="side"><div class="kind">${p.k}</div><div><div class="big">${p.big}</div><div class="kl">${p.kl}</div></div></div><div class="body"><h3>${p.t}</h3><p>${p.d}</p><ul>${p.b.map(x=>`<li>${x}</li>`).join('')}</ul><div class="chips">${p.s.map(x=>`<span>${x}</span>`).join('')}</div></div></article>`).join('');
+
+const sk=[["Programming",["Python","SQL","C++","JavaScript"]],["ML & deep learning",["Supervised / unsupervised","Neural networks","Transfer learning","Anomaly detection","Time-series","Feature engineering"]],["Computer vision",["Object detection","Image classification","YOLOv8","OpenCV","Roboflow"]],["Libraries",["NumPy","pandas","scikit-learn","PyTorch","TensorFlow","Keras","Matplotlib"]],["NLP & GenAI",["LLMs","LangChain","RAG","Streamlit apps"]],["Deployment & MLOps",["Flask","FastAPI","Docker","Kubernetes","AWS EC2/S3/ECR/EKS","GitHub Actions","MLflow","DVC","Prometheus","Grafana"]],["Data viz & BI",["Power BI","Streamlit","Plotly","Excel"]],["Core CS",["DSA","OOP","DBMS","Operating systems"]]];
+document.getElementById('skl').innerHTML=sk.map(s=>`<div class="rv"><h3>${s[0]}</h3><p>${s[1].map(x=>`<span>${x}</span>`).join('')}</p></div>`).join('');
+
+const els=document.querySelectorAll('.rv');
+if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});els.forEach(e=>io.observe(e))}else els.forEach(e=>e.classList.add('on'));
+
+const cp=document.getElementById('cp');
+cp.addEventListener('click',async()=>{try{await navigator.clipboard.writeText('me.ishikamehrotra@gmail.com');cp.textContent='Copied ✓'}catch(e){cp.textContent='Select the address'}setTimeout(()=>cp.textContent='Copy email',2000)});
+}
+</script>
+</body>
+</html>
